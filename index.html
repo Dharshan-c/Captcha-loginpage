@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="path/to/new-favicon.ico">
+
+</head>
+<body>
+    
+    <div class="login-form">
+        <h1>Login</h1>
+        <div class="container">
+            <div class="main">
+                <div class="content">
+                    <h2>Log In</h2>
+                    <form id="logindoc">
+                        <input type="text" name="" placeholder="username" id="username" required autofocus="">
+                        <input type="password" name="" placeholder="password" id="password" required autofocus="">
+                        <input type="text" placeholder="captcha" id="captcha" readonly required>
+                        <input type="text" placeholder="Enter CAPTCHA" id="captchaInput" required autofocus>
+                         <button class="btn" type="submit">
+                            Login
+                         </button>
+                         <p id="message"></p>
+
+                    </form>
+                    <p class="account">Don't Have An Account? <a href="register1.html">Register</a></p>
+<script>
+    var code;
+
+function createCaptcha() {
+    var charArray = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$&*";
+    var length = 5;
+    var captcha = [];
+    for (var i = 0; i < length; i++) {
+        var index = Math.floor(Math.random() * charArray.length);
+        captcha.push(charArray[index]);
+    }
+    code = captcha.join("");
+    document.getElementById('captcha').value = code;
+}
+
+document.getElementById('logindoc').addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const captchaInput = document.getElementById('captchaInput').value;
+    const message = document.getElementById('message');
+
+    if (captchaInput !== code) {
+        message.style.color = 'red';
+        message.textContent = 'Invalid CAPTCHA. Please try again.';
+        createCaptcha(); // Regenerate CAPTCHA on failure
+        return;
+    }
+
+    if (username === 'dharshan' && password === 'dharsh') {
+        message.style.color = 'green';
+        message.textContent = 'Login Successful';
+        // Redirect to another page after successful login
+        /*location.replace("https://dharshan-c.github.io/Reestar-Nexusinfo/");*/
+    } else {
+        message.style.color = 'red';
+        message.textContent = 'Login failed, please try again';
+    }
+});
+
+// Initialize CAPTCHA on page load
+createCaptcha();
+</script>
+</div>
+<div class="form-img">
+    <img src="mobile-login-concept-illustration_114360-83.avif" alt="">
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
